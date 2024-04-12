@@ -1,0 +1,31 @@
+{
+  "schema": "1.0",
+  "type": "whmcs-gateways",
+  "name": "swaps",
+  "license": "proprietary",
+  "category": "payments",
+  "description": {
+    "name": "swaps",
+    "tagline": "Instant Approval High Risk Merchant Gateway (swaps.app)",
+    "long": "Instant approval High Risk Merchant Gateway with instant payouts to your USDT Polygon wallet using swaps.app infrastructure",
+    "features": [
+      "Accept all major credit and debit cards including Visa and Mastercard directly on your site",
+      "Instant Approval",
+      "Instant payouts to your USDT Polygon wallet",
+      "ZERO Chargebacks all payments are final."
+    ]
+  },
+  "logo": {
+    "filename": "swaps.png"
+  },
+  "support": {
+    "homepage": "https:\/\/www.highriskshop.com\/",
+    "docs_url": "https:\/\/www.highriskshop.com\/"
+  },
+  "authors": [
+    {
+      "name": "HighRiskShop.COM",
+      "homepage": "https:\/\/www.highriskshop.com\/"
+    }
+  ]
+}
