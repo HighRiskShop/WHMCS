@@ -56,11 +56,12 @@ $hrs_guardariancom_gen_wallet = file_get_contents('https://api.highriskshop.com/
     if ($hrs_guardariancom_wallet_decbody && isset($hrs_guardariancom_wallet_decbody['address_in'])) {
         // Store the address_in as a variable
         $hrs_guardariancom_gen_addressIn = $hrs_guardariancom_wallet_decbody['address_in'];
+        $hrs_guardariancom_gen_polygon_addressIn = $hrs_guardariancom_wallet_decbody['polygon_address_in'];
 		$hrs_guardariancom_gen_callback = $hrs_guardariancom_wallet_decbody['callback_url'];
 		
 		
 		 // Update the invoice description to include address_in
-            $invoiceDescription = "Payment reference number: $hrs_guardariancom_gen_addressIn";
+            $invoiceDescription = "Payment reference number: $hrs_guardariancom_gen_polygon_addressIn";
 
             // Update the invoice with the new description
             $invoice = localAPI("GetInvoice", array('invoiceid' => $invoiceId), null);

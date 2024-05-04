@@ -1,13 +1,13 @@
 {
   "schema": "1.0",
   "type": "whmcs-gateways",
-  "name": "swaps",
+  "name": "rampnetwork",
   "license": "proprietary",
   "category": "payments",
   "description": {
-    "name": "swaps",
-    "tagline": "Instant Approval High Risk Merchant Gateway (swaps.app)",
-    "long": "Instant approval High Risk Merchant Gateway with instant payouts to your USDT Polygon wallet using swaps.app infrastructure",
+    "name": "rampnetwork",
+    "tagline": "Instant Approval High Risk Merchant Gateway (ramp.network)",
+    "long": "Instant approval High Risk Merchant Gateway with instant payouts to your USDT Polygon wallet using ramp.network infrastructure",
     "features": [
       "Accept all major credit and debit cards including Visa and Mastercard directly on your site",
       "Instant Approval",
@@ -16,7 +16,7 @@
     ]
   },
   "logo": {
-    "filename": "swaps.png"
+    "filename": "rampnetwork.png"
   },
   "support": {
     "homepage": "https:\/\/www.highriskshop.com\/",

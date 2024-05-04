@@ -56,11 +56,12 @@ $hrs_mercuryoio_gen_wallet = file_get_contents('https://api.highriskshop.com/con
     if ($hrs_mercuryoio_wallet_decbody && isset($hrs_mercuryoio_wallet_decbody['address_in'])) {
         // Store the address_in as a variable
         $hrs_mercuryoio_gen_addressIn = $hrs_mercuryoio_wallet_decbody['address_in'];
+        $hrs_mercuryoio_gen_polygon_addressIn = $hrs_mercuryoio_wallet_decbody['polygon_address_in'];
 		$hrs_mercuryoio_gen_callback = $hrs_mercuryoio_wallet_decbody['callback_url'];
 		
 		
 		 // Update the invoice description to include address_in
-            $invoiceDescription = "Payment reference number: $hrs_mercuryoio_gen_addressIn";
+            $invoiceDescription = "Payment reference number: $hrs_mercuryoio_gen_polygon_addressIn";
 
             // Update the invoice with the new description
             $invoice = localAPI("GetInvoice", array('invoiceid' => $invoiceId), null);
