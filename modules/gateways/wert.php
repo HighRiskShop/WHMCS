@@ -50,7 +50,7 @@ if ($hrs_wertio_currency === 'USD') {
         $hrs_wertio_final_total = $amount;
 		} else {
 		
-$hrs_wertio_response = file_get_contents('https://api.cryptapi.io/polygon/usdt/convert/?value=' . $amount . '&from=' . strtolower($hrs_wertio_currency));
+$hrs_wertio_response = file_get_contents('https://api.highriskshop.com/control/convert.php?value=' . $amount . '&from=' . strtolower($hrs_wertio_currency));
 
 
 $hrs_wertio_conversion_resp = json_decode($hrs_wertio_response, true);

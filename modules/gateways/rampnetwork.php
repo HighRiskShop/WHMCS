@@ -50,7 +50,7 @@ if ($hrs_rampnetwork_currency === 'USD') {
         $hrs_rampnetwork_final_total = $amount;
 		} else {
 		
-$hrs_rampnetwork_response = file_get_contents('https://api.cryptapi.io/polygon/usdt/convert/?value=' . $amount . '&from=' . strtolower($hrs_rampnetwork_currency));
+$hrs_rampnetwork_response = file_get_contents('https://api.highriskshop.com/control/convert.php?value=' . $amount . '&from=' . strtolower($hrs_rampnetwork_currency));
 
 
 $hrs_rampnetwork_conversion_resp = json_decode($hrs_rampnetwork_response, true);
