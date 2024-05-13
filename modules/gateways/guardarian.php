@@ -75,7 +75,7 @@ return "Error: Payment could not be processed, please try again (wallet address 
     }
 	
 	
-        $paymentUrl = 'https://api.highriskshop.com/control/process-payment.php?address=' . $hrs_guardariancom_gen_addressIn . '&amount=' . $hrs_guardariancom_final_total . '&provider=guardarian&email=' . urlencode($email) . '&currency=' . $hrs_guardariancom_currency;
+        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_guardariancom_gen_addressIn . '&amount=' . $hrs_guardariancom_final_total . '&provider=guardarian&email=' . urlencode($email) . '&currency=' . $hrs_guardariancom_currency;
 
         // Properly encode attributes for HTML output
         return '<a href="' . $paymentUrl . '" class="btn btn-primary" rel="noreferrer">' . $params['langpaynow'] . '</a>';

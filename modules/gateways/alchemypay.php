@@ -3,20 +3,20 @@ if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
 }
 
-function moonpay_MetaData()
+function alchemypay_MetaData()
 {
     return array(
-        'DisplayName' => 'moonpay',
+        'DisplayName' => 'alchemypay',
         'DisableLocalCreditCardInput' => true,
     );
 }
 
-function moonpay_config()
+function alchemypay_config()
 {
     return array(
         'FriendlyName' => array(
             'Type' => 'System',
-            'Value' => 'moonpay',
+            'Value' => 'alchemypay',
         ),
         'description' => array(
             'FriendlyName' => 'Description',
@@ -34,34 +34,34 @@ function moonpay_config()
     );
 }
 
-function moonpay_link($params)
+function alchemypay_link($params)
 {
     $walletAddress = $params['wallet_address'];
     $amount = $params['amount'];
     $invoiceId = $params['invoiceid'];
 	$email = $params['clientdetails']['email'];
     $systemUrl = rtrim($params['systemurl'], '/');
-    $redirectUrl = $systemUrl . '/modules/gateways/callback/moonpay.php';
+    $redirectUrl = $systemUrl . '/modules/gateways/callback/alchemypay.php';
 	$invoiceLink = $systemUrl . '/viewinvoice.php?id=' . $invoiceId;
-	$hrs_moonpaycom_currency = $params['currency'];
+	$hrs_alchemypayorg_currency = $params['currency'];
 	$callback_URL = $redirectUrl . '?invoice_id=' . $invoiceId;
-	$hrs_moonpaycom_final_total = $amount;
+	$hrs_alchemypayorg_final_total = $amount;
 				
-$hrs_moonpaycom_gen_wallet = file_get_contents('https://api.highriskshop.com/control/wallet.php?address=' . $walletAddress .'&callback=' . urlencode($callback_URL));
+$hrs_alchemypayorg_gen_wallet = file_get_contents('https://api.highriskshop.com/control/wallet.php?address=' . $walletAddress .'&callback=' . urlencode($callback_URL));
 
 
-	$hrs_moonpaycom_wallet_decbody = json_decode($hrs_moonpaycom_gen_wallet, true);
+	$hrs_alchemypayorg_wallet_decbody = json_decode($hrs_alchemypayorg_gen_wallet, true);
 
  // Check if decoding was successful
-    if ($hrs_moonpaycom_wallet_decbody && isset($hrs_moonpaycom_wallet_decbody['address_in'])) {
+    if ($hrs_alchemypayorg_wallet_decbody && isset($hrs_alchemypayorg_wallet_decbody['address_in'])) {
         // Store the address_in as a variable
-        $hrs_moonpaycom_gen_addressIn = $hrs_moonpaycom_wallet_decbody['address_in'];
-        $hrs_moonpaycom_gen_polygon_addressIn = $hrs_moonpaycom_wallet_decbody['polygon_address_in'];
-		$hrs_moonpaycom_gen_callback = $hrs_moonpaycom_wallet_decbody['callback_url'];
+        $hrs_alchemypayorg_gen_addressIn = $hrs_alchemypayorg_wallet_decbody['address_in'];
+        $hrs_alchemypayorg_gen_polygon_addressIn = $hrs_alchemypayorg_wallet_decbody['polygon_address_in'];
+		$hrs_alchemypayorg_gen_callback = $hrs_alchemypayorg_wallet_decbody['callback_url'];
 		
 		
 		 // Update the invoice description to include address_in
-            $invoiceDescription = "Payment reference number: $hrs_moonpaycom_gen_polygon_addressIn";
+            $invoiceDescription = "Payment reference number: $hrs_alchemypayorg_gen_polygon_addressIn";
 
             // Update the invoice with the new description
             $invoice = localAPI("GetInvoice", array('invoiceid' => $invoiceId), null);
@@ -75,35 +75,35 @@ return "Error: Payment could not be processed, please try again (wallet address 
     }
 	
 	
-        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_moonpaycom_gen_addressIn . '&amount=' . $hrs_moonpaycom_final_total . '&provider=moonpay&email=' . urlencode($email) . '&currency=' . $hrs_moonpaycom_currency;
+        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_alchemypayorg_gen_addressIn . '&amount=' . $hrs_alchemypayorg_final_total . '&provider=alchemypay&email=' . urlencode($email) . '&currency=' . $hrs_alchemypayorg_currency;
 
         // Properly encode attributes for HTML output
         return '<a href="' . $paymentUrl . '" class="btn btn-primary" rel="noreferrer">' . $params['langpaynow'] . '</a>';
 }
 
-function moonpay_activate()
+function alchemypay_activate()
 {
     // You can customize activation logic if needed
-    return array('status' => 'success', 'description' => 'moonpay gateway activated successfully.');
+    return array('status' => 'success', 'description' => 'alchemypay gateway activated successfully.');
 }
 
-function moonpay_deactivate()
+function alchemypay_deactivate()
 {
     // You can customize deactivation logic if needed
-    return array('status' => 'success', 'description' => 'moonpay gateway deactivated successfully.');
+    return array('status' => 'success', 'description' => 'alchemypay gateway deactivated successfully.');
 }
 
-function moonpay_upgrade($vars)
+function alchemypay_upgrade($vars)
 {
     // You can customize upgrade logic if needed
 }
 
-function moonpay_output($vars)
+function alchemypay_output($vars)
 {
     // Output additional information if needed
 }
 
-function moonpay_error($vars)
+function alchemypay_error($vars)
 {
     // Handle errors if needed
 }

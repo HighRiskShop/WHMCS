@@ -75,7 +75,7 @@ return "Error: Payment could not be processed, please try again (wallet address 
     }
 	
 	
-        $paymentUrl = 'https://api.highriskshop.com/control/process-payment.php?address=' . $hrs_mercuryoio_gen_addressIn . '&amount=' . $hrs_mercuryoio_final_total . '&provider=mercuryo&email=' . urlencode($email) . '&currency=' . $hrs_mercuryoio_currency;
+        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_mercuryoio_gen_addressIn . '&amount=' . $hrs_mercuryoio_final_total . '&provider=mercuryo&email=' . urlencode($email) . '&currency=' . $hrs_mercuryoio_currency;
 
         // Properly encode attributes for HTML output
         return '<a href="' . $paymentUrl . '" class="btn btn-primary" rel="noreferrer">' . $params['langpaynow'] . '</a>';

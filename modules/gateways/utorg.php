@@ -3,20 +3,20 @@ if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
 }
 
-function moonpay_MetaData()
+function utorg_MetaData()
 {
     return array(
-        'DisplayName' => 'moonpay',
+        'DisplayName' => 'utorg',
         'DisableLocalCreditCardInput' => true,
     );
 }
 
-function moonpay_config()
+function utorg_config()
 {
     return array(
         'FriendlyName' => array(
             'Type' => 'System',
-            'Value' => 'moonpay',
+            'Value' => 'utorg',
         ),
         'description' => array(
             'FriendlyName' => 'Description',
@@ -34,34 +34,34 @@ function moonpay_config()
     );
 }
 
-function moonpay_link($params)
+function utorg_link($params)
 {
     $walletAddress = $params['wallet_address'];
     $amount = $params['amount'];
     $invoiceId = $params['invoiceid'];
 	$email = $params['clientdetails']['email'];
     $systemUrl = rtrim($params['systemurl'], '/');
-    $redirectUrl = $systemUrl . '/modules/gateways/callback/moonpay.php';
+    $redirectUrl = $systemUrl . '/modules/gateways/callback/utorg.php';
 	$invoiceLink = $systemUrl . '/viewinvoice.php?id=' . $invoiceId;
-	$hrs_moonpaycom_currency = $params['currency'];
+	$hrs_utorgpro_currency = $params['currency'];
 	$callback_URL = $redirectUrl . '?invoice_id=' . $invoiceId;
-	$hrs_moonpaycom_final_total = $amount;
+	$hrs_utorgpro_final_total = $amount;
 				
-$hrs_moonpaycom_gen_wallet = file_get_contents('https://api.highriskshop.com/control/wallet.php?address=' . $walletAddress .'&callback=' . urlencode($callback_URL));
+$hrs_utorgpro_gen_wallet = file_get_contents('https://api.highriskshop.com/control/wallet.php?address=' . $walletAddress .'&callback=' . urlencode($callback_URL));
 
 
-	$hrs_moonpaycom_wallet_decbody = json_decode($hrs_moonpaycom_gen_wallet, true);
+	$hrs_utorgpro_wallet_decbody = json_decode($hrs_utorgpro_gen_wallet, true);
 
  // Check if decoding was successful
-    if ($hrs_moonpaycom_wallet_decbody && isset($hrs_moonpaycom_wallet_decbody['address_in'])) {
+    if ($hrs_utorgpro_wallet_decbody && isset($hrs_utorgpro_wallet_decbody['address_in'])) {
         // Store the address_in as a variable
-        $hrs_moonpaycom_gen_addressIn = $hrs_moonpaycom_wallet_decbody['address_in'];
-        $hrs_moonpaycom_gen_polygon_addressIn = $hrs_moonpaycom_wallet_decbody['polygon_address_in'];
-		$hrs_moonpaycom_gen_callback = $hrs_moonpaycom_wallet_decbody['callback_url'];
+        $hrs_utorgpro_gen_addressIn = $hrs_utorgpro_wallet_decbody['address_in'];
+        $hrs_utorgpro_gen_polygon_addressIn = $hrs_utorgpro_wallet_decbody['polygon_address_in'];
+		$hrs_utorgpro_gen_callback = $hrs_utorgpro_wallet_decbody['callback_url'];
 		
 		
 		 // Update the invoice description to include address_in
-            $invoiceDescription = "Payment reference number: $hrs_moonpaycom_gen_polygon_addressIn";
+            $invoiceDescription = "Payment reference number: $hrs_utorgpro_gen_polygon_addressIn";
 
             // Update the invoice with the new description
             $invoice = localAPI("GetInvoice", array('invoiceid' => $invoiceId), null);
@@ -75,35 +75,35 @@ return "Error: Payment could not be processed, please try again (wallet address 
     }
 	
 	
-        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_moonpaycom_gen_addressIn . '&amount=' . $hrs_moonpaycom_final_total . '&provider=moonpay&email=' . urlencode($email) . '&currency=' . $hrs_moonpaycom_currency;
+        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_utorgpro_gen_addressIn . '&amount=' . $hrs_utorgpro_final_total . '&provider=utorg&email=' . urlencode($email) . '&currency=' . $hrs_utorgpro_currency;
 
         // Properly encode attributes for HTML output
         return '<a href="' . $paymentUrl . '" class="btn btn-primary" rel="noreferrer">' . $params['langpaynow'] . '</a>';
 }
 
-function moonpay_activate()
+function utorg_activate()
 {
     // You can customize activation logic if needed
-    return array('status' => 'success', 'description' => 'moonpay gateway activated successfully.');
+    return array('status' => 'success', 'description' => 'utorg gateway activated successfully.');
 }
 
-function moonpay_deactivate()
+function utorg_deactivate()
 {
     // You can customize deactivation logic if needed
-    return array('status' => 'success', 'description' => 'moonpay gateway deactivated successfully.');
+    return array('status' => 'success', 'description' => 'utorg gateway deactivated successfully.');
 }
 
-function moonpay_upgrade($vars)
+function utorg_upgrade($vars)
 {
     // You can customize upgrade logic if needed
 }
 
-function moonpay_output($vars)
+function utorg_output($vars)
 {
     // Output additional information if needed
 }
 
-function moonpay_error($vars)
+function utorg_error($vars)
 {
     // Handle errors if needed
 }

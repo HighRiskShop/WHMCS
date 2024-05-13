@@ -75,7 +75,7 @@ return "Error: Payment could not be processed, please try again (wallet address 
     }
 	
 	
-        $paymentUrl = 'https://api.highriskshop.com/control/process-payment.php?address=' . $hrs_banxacom_gen_addressIn . '&amount=' . $hrs_banxacom_final_total . '&provider=banxa&email=' . urlencode($email) . '&currency=' . $hrs_banxacom_currency;
+        $paymentUrl = 'https://pay.highriskshop.com/process-payment.php?address=' . $hrs_banxacom_gen_addressIn . '&amount=' . $hrs_banxacom_final_total . '&provider=banxa&email=' . urlencode($email) . '&currency=' . $hrs_banxacom_currency;
 
         // Properly encode attributes for HTML output
         return '<a href="' . $paymentUrl . '" class="btn btn-primary" rel="noreferrer">' . $params['langpaynow'] . '</a>';
