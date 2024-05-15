@@ -45,8 +45,27 @@ function transfi_link($params)
 	$invoiceLink = $systemUrl . '/viewinvoice.php?id=' . $invoiceId;
 	$hrs_transficom_currency = $params['currency'];
 	$callback_URL = $redirectUrl . '?invoice_id=' . $invoiceId;
-	$hrs_transficom_final_total = $amount;
-				
+
+if ($hrs_transficom_currency === 'USD') {
+        $hrs_transficom_final_total = $amount;
+		} else {
+		
+$hrs_transficom_response = file_get_contents('https://api.highriskshop.com/control/convert.php?value=' . $amount . '&from=' . strtolower($hrs_transficom_currency));
+
+
+$hrs_transficom_conversion_resp = json_decode($hrs_transficom_response, true);
+
+if ($hrs_transficom_conversion_resp && isset($hrs_transficom_conversion_resp['value_coin'])) {
+    // Escape output
+    $hrs_transficom_final_total	= $hrs_transficom_conversion_resp['value_coin'];      
+} else {
+	return "Error: Payment could not be processed, please try again (unsupported store currency)";
+}	
+		}
+		
+		
+		
+		
 $hrs_transficom_gen_wallet = file_get_contents('https://api.highriskshop.com/control/wallet.php?address=' . $walletAddress .'&callback=' . urlencode($callback_URL));
 
 
